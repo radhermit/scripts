@@ -1,0 +1,4 @@
+#!/bin/sh
+# qv - view a queued message by queue ID
+
+find /var/spool/postfix/ -name "$1" | xargs postcat

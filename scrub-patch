@@ -1,0 +1,17 @@
+#!/bin/sh
+# Clean extraneous info from patch files (http://dev.gentoo.org/~vapier/clean-patches)
+
+sed -i \
+	-e '/^index /d' \
+	-e '/^new file mode /d' \
+	-e '/^Index:/d' \
+	-e '/^=========/d' \
+	-e '/^RCS file:/d' \
+	-e '/^retrieving/d' \
+	-e '/^diff/d' \
+	-e '/^Files .* differ$/d' \
+	-e '/^Only in /d' \
+	-e '/^Common subdirectories/d' \
+	-e '/^+++/s:\t.*::' \
+	-e '/^---/s:\t.*::' \
+	"$@"
