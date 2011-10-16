@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simple wrapper to control pianobar via fifo
+
+echo -n "${1#-}" > ~/.config/pianobar/ctl
