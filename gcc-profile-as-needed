@@ -1,0 +1,8 @@
+#!/bin/sh
+# Creates a gcc profile that forces --as-needed for all non-static linking
+# http://blog.flameeyes.eu/2008/11/14/problems-and-mitigation-strategies-for-as-needed
+
+export SPECSFILE=$(dirname "$(gcc -print-libgcc-file-name)")/forced.specs
+export CURRPROFILE=/etc/env.d/gcc/$(gcc-config -c)
+gcc -dumpspecs | sed -e '/link:/,+1 s:--eh-frame-hdr:\0 --as-needed --no-copy-dt-needed-entries:' > "$SPECSFILE"
+sed "${CURRPROFILE}" -e '1i\GCC_SPECS='$SPECSFILE > "${CURRPROFILE}-forced"
