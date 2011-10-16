@@ -1,0 +1,13 @@
+#!/bin/sh
+# View current portage changelogs for packages
+#
+# TODO: add choice for multiple matches
+
+pkg="$(eix --brief --only-names --in-overlay 0 $1)"
+
+if [ -z "$pkg" ] ; then
+	echo "No matches found."
+	exit 1
+fi
+
+vim -R -c "noremap q :q<CR>" "http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/${pkg}/ChangeLog"
