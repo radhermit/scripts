@@ -1,0 +1,7 @@
+#!/bin/sh
+# Flash openwrt via tftp
+
+FIRMWARE="$1"
+IP="${2:-192.168.1.1}"
+
+echo -e "binary\nrexmt 1\ntimeout 60\ntrace\nput $FIRMWARE\n" | tftp $IP
