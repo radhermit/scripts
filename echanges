@@ -10,4 +10,4 @@ if [ -z "$pkg" ] ; then
 	exit 1
 fi
 
-vim -R -c "noremap q :q<CR>" "http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/${pkg}/ChangeLog"
+vim -R -c "noremap q :q<CR>" "http://sources.gentoo.org/${pkg}/ChangeLog"
