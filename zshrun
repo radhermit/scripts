@@ -1,0 +1,3 @@
+#/bin/sh
+
+ZSHRUN=1 urxvtc +sb +ls -bg black -fg white -b 1 -bd gray22 -cr gray -name zshrun -title zshrun
