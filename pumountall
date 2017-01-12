@@ -1,14 +1,19 @@
 #!/bin/bash
 # Unmount all removable mountpoints currently mounted by pmount.
 
-[[ -x $(which pumount) && -x $(which sudo) ]] || return 1
+SCRIPT=$(basename $0)
+
+if ! type -P pumount >/dev/null; then
+	echo "${SCRIPT}: pmount not installed" >&2
+	exit 1
+fi
 
 shopt -s nullglob
 for dir in /media/removable/* ; do
 	pumount "${dir}" &> /dev/null
 	if [[ $? -ne 0 ]]; then
-		if [[ $(sudo ls -A ${dir}) == ".created_by_pmount" ]]; then
-			sudo rm -rf "${dir}"
+		if [[ $(ls -A ${dir}) == ".created_by_pmount" ]]; then
+			rm -rf "${dir}"
 		else
 			echo "${dir} not unmounted"
 			exit 1
