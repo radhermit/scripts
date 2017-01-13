@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Scan for reverse linking dependencies
+for f in "$@" ; do
+	if [[ -n $(file "$f" | grep ELF) ]] ; then
+		echo "Rdeps: $f"
+		scanelf -L -n -q -F '%n #F' "$f" | tr , ' ' | xargs qfile -C | sort -u
+	fi
+done
