@@ -1,0 +1,9 @@
+#!/bin/bash
+# Dump the config files of a specified host running openwrt.
+
+ssh -qT $1 << EOF
+sysupgrade -b /tmp/backup-\$HOSTNAME-\$(date +%FT%TZ)-\$(cat /etc/openwrt_version).tar.gz
+EOF
+
+scp "$1:/tmp/backup-*" ./
+ssh -qT $1 "rm /tmp/backup-*"
